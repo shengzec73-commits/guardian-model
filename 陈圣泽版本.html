@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>伝統的な守護感｜体験型計算モデル V2</title>
+<style>
+:root{--bg:#fff;--paper:#fff;--ink:#191919;--muted:#666;--line:#dedede;--red:#b12a2a;--soft:#f7f7f7}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:14px;line-height:1.7}button,input{font:inherit}a{color:inherit}.shell{max-width:1240px;margin:auto;padding:52px 36px 40px}.hero{display:grid;grid-template-columns:1.65fr 1fr;gap:44px;padding:18px 0 36px;border-bottom:1px solid var(--ink)}.kicker{font-size:12px;letter-spacing:.12em;color:var(--muted);margin-bottom:26px}.hero h1{font-size:clamp(28px,3.4vw,42px);line-height:1.5;font-weight:600;letter-spacing:.02em;margin:0 0 20px}.hero p{font-size:13px;color:var(--muted);line-height:2;margin:0;max-width:650px}.hero-side{display:flex;flex-direction:column;justify-content:center;align-items:flex-end;text-align:right}.hero-mark{font-size:clamp(34px,4vw,58px);font-weight:400;letter-spacing:-.04em}.hero-side small{font-size:11px;color:var(--muted);margin-top:16px}.flow{display:grid;grid-template-columns:repeat(5,1fr);margin:0 0 44px;border-bottom:1px solid var(--line)}.step{padding:20px 14px 20px 0}.step b{display:block;font-size:11px;color:var(--red);margin-bottom:6px}.step strong{font-size:13px;font-weight:600}.step span{display:block;color:var(--muted);font-size:11px;margin-top:4px}.layout{display:grid;grid-template-columns:1fr 1.12fr;gap:36px;align-items:start}.card{min-width:0;padding:0}.card+.card{margin-top:32px;padding-top:26px;border-top:1px solid var(--line)}.titleline{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}h2{font-size:18px;letter-spacing:.02em;margin:0 0 10px;font-weight:600}.desc{font-size:12px;line-height:1.9;color:var(--muted);margin-bottom:20px}button{background:#fff;color:#333;border:1px solid #bbb;border-radius:3px;padding:7px 12px;white-space:nowrap;cursor:pointer;font-size:12px}button:hover{background:#f3f3f3}button:focus-visible,input:focus-visible{outline:2px solid var(--red);outline-offset:4px}.xrow{padding:15px 0;border-top:1px solid #e6e6e6}.xhead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:7px}.xlabel{font-size:13px;font-weight:500}.groupTag{font-size:10px;color:#666;margin-left:6px;white-space:nowrap}.codes{text-align:right;font-variant-numeric:tabular-nums;flex-shrink:0}.codes b{font-size:16px;font-weight:500}.codes small{display:block;font-size:10px;color:#666}input[type=range]{display:block;width:100%;height:24px;margin:0;accent-color:var(--red);cursor:pointer}.ticks{display:flex;justify-content:space-between;font-size:10px;color:#666}.formula{background:#f6f6f6;border-radius:3px;padding:14px 16px;margin-top:16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.9;overflow-wrap:anywhere}.formula em{font-style:normal;font-weight:600}.formula-note{color:#666;font-size:11px}.legend{padding:0 0 0 12px;margin-top:18px;border-left:2px solid #ccc;font-size:11px;color:#666;line-height:1.9}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}.metric{background:#fff;padding:16px 8px;text-align:center}.metric .lab{font-size:10px;min-height:34px;color:#555}.metric .big{font-size:32px;font-weight:500;line-height:1.3;font-variant-numeric:tabular-nums;margin:8px 0}.metric .std{color:var(--red);font-size:11px}.metric .mid{font-size:10px;color:#666;margin-top:5px}.scale-key{font-size:11px;color:#666;margin-top:16px;line-height:1.9}.scale-key b{font-weight:400;color:#333}.process{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;margin-top:18px;align-items:center}.pbox{padding:10px 4px;background:#f6f6f6;text-align:center}.pbox small{display:block;font-size:9px;color:#666}.pbox strong{display:block;font-size:18px;font-weight:500}.arrow{color:#999}canvas{display:block;width:100%;height:auto;aspect-ratio:2;margin-top:20px}.chart-note{font-size:10px;text-align:center;color:#666;margin:-4px 0 20px}.barlabel{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-bottom:8px}.bar{height:5px;background:#eaeaea;overflow:hidden}.fill{height:100%;background:#333;width:0}.result{border-left:3px solid var(--red);background:#f7f7f7;padding:16px 18px;margin-top:16px}.eyebrow{font-size:10px;color:#666}.zname{font-size:25px;font-weight:500;margin:5px 0 8px}.meta{font-size:11px;color:#555;line-height:1.9}table{width:100%;border-collapse:collapse;font-size:11px;margin-top:18px}th,td{padding:10px 7px;border-bottom:1px solid #e5e5e5;text-align:left}th{font-weight:500;color:#666}.num{text-align:right;font-variant-numeric:tabular-nums}tr.best{background:#f4f4f4;font-weight:600}tr.best td:first-child{color:var(--red)}.footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:11px;color:#666;line-height:2}.footer strong{font-weight:600;color:#333}
+@media(max-width:900px){.shell{padding:28px 22px}.hero{grid-template-columns:1fr;gap:20px}.hero-side{align-items:flex-start;text-align:left}.hero-mark{font-size:34px}.hero-side small{margin-top:6px}.layout{grid-template-columns:1fr;gap:36px}.flow{margin-bottom:28px}.step{padding-right:8px}.step strong{font-size:12px}.step span{font-size:10px}}
+@media(max-width:540px){.shell{padding:24px 18px}.hero{padding-top:0}.hero h1{font-size:27px}.flow{grid-template-columns:repeat(6,1fr)}.step{grid-column:span 2;padding-top:14px;padding-bottom:14px}.step:nth-child(n+4){grid-column:span 3;border-top:1px solid #eee}.metrics .lab{font-size:10px}.metric{padding:12px 5px}.metric .big{font-size:28px}h2{font-size:17px}.zname{font-size:23px}th,td{padding:9px 4px;font-size:10px}.pbox small{font-size:9px}.barlabel{font-size:11px}.titleline{gap:8px}.xlabel{font-size:12px}}
+@media print{.shell{padding:0}.layout{grid-template-columns:1fr 1fr;gap:24px}button{display:none}.hero{padding-bottom:20px}.flow{margin-bottom:20px}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <section class="hero">
+    <div>
+      <div class="kicker">伝統的な守護感の研究 · 計算モデル V2</div>
+      <h1>伝統的な守護感を、<br>かたちから読み解く。</h1>
+      <p>
+        造像の10項目の視覚的特徴を入力し、守護感の計算過程をたどります。<br>特徴 X から知覚値 Y、そして守護タイプ Z へ。数値の変換と判定の根拠を確認できます。
+      </p>
+    </div>
+    <div class="hero-side">
+      <div class="hero-mark">X→Y→Z</div>
+      <small>研究者による仮説モデル V2<br>展示・予備検証のためのモデル</small>
+    </div>
+  </section>
+
+  <div class="flow">
+    <div class="step"><b>01</b><strong>視覚的特徴 X</strong><span>−100 / −50 / 0 / +50 / +100</span></div>
+    <div class="step"><b>02</b><strong>内部コード</strong><span>−2 / −1 / 0 / +1 / +2</span></div>
+    <div class="step"><b>03</b><strong>知覚値 Y</strong><span>1〜5（小数を含む）</span></div>
+    <div class="step"><b>04</b><strong>標準値 Y</strong><span>−100 ～ +100</span></div>
+    <div class="step"><b>05</b><strong>守護タイプ Z</strong><span>3次元ユークリッド距離による判定</span></div>
+  </div>
+
+  <div class="layout">
+    <section class="card">
+      <div class="titleline">
+        <div>
+          <h2>01　視覚的特徴を入力</h2>
+          <div class="desc">
+            スライダーで5段階の値を選択してください。各項目に標準値と内部コードを表示します。
+          </div>
+        </div>
+        <button onclick="resetAll()">リセット</button>
+      </div>
+
+      <div id="xrows"></div>
+
+      <div class="formula">
+        内部コード：<em>x = X ÷ 50</em><br>
+        Y1 = 3 + mean(x1,x2,x3,x4)<br>
+        Y2 = 3 + mean(x5,x6,x7)<br>
+        Y3 = 3 + mean(x8,x9,x10)<br>
+        標準値：<em>Ystd = (Y − 3) × 50</em>
+      </div>
+
+      <div class="legend">
+        X を50で割り、内部コード −2〜+2 に変換します。グループ内の平均に3を加えると、1〜5の知覚値 Y が得られます（小数を含みます）。さらに (Y − 3) × 50 で、Z の中心座標と同じ尺度に揃えます。
+      </div>
+    </section>
+
+    <section>
+      <div class="card">
+        <h2>02　知覚値 Y への変換</h2>
+        <div class="desc">内部コードの平均 → 知覚値（1〜5）→ 標準値（−100〜+100）の順に変換します。</div>
+
+        <div class="metrics">
+          <div class="metric">
+            <div class="lab">Y1｜視線の交差</div>
+            <div class="big" id="y1">3.00</div>
+            <div class="std" id="ys1">標準値 0</div>
+            <div class="mid" id="avg1">内部コード平均 0</div>
+          </div>
+          <div class="metric">
+            <div class="lab">Y2｜プロポーションによる畏敬</div>
+            <div class="big" id="y2">3.00</div>
+            <div class="std" id="ys2">標準値 0</div>
+            <div class="mid" id="avg2">内部コード平均 0</div>
+          </div>
+          <div class="metric">
+            <div class="lab">Y3｜感情のリズム</div>
+            <div class="big" id="y3">3.00</div>
+            <div class="std" id="ys3">標準値 0</div>
+            <div class="mid" id="avg3">内部コード平均 0</div>
+          </div>
+        </div>
+
+        <div class="scale-key">知覚値 → 標準値<br><b>1 → −100　／　2 → −50　／　3 → 0<br>4 → +50　／　5 → +100</b></div><div class="process">
+          <div class="pbox"><small>Y1 の内部コード平均</small><strong id="pA">0.00</strong></div>
+          <div class="arrow">→</div>
+          <div class="pbox"><small>3を加えて Y1 に変換</small><strong id="pB">3.00</strong></div>
+          <div class="arrow">→</div>
+          <div class="pbox"><small>Y1 の標準値へ変換</small><strong id="pC">0.00</strong></div>
+        </div>
+
+        <canvas id="radar" width="760" height="380" role="img" aria-label="3つの知覚値のレーダーチャート。数値は上の表に表示。"></canvas><p class="chart-note">知覚値 Y の分布 · 目盛り 1〜5</p>
+
+        <div class="barbox">
+          <div class="barlabel"><span>補助指標｜総合的な守護強度 S</span><strong id="sText">3.00 / 5</strong></div>
+          <div class="bar"><div class="fill" id="sFill"></div></div>
+        </div>
+        <div class="formula">
+          S = (Y1 + Y2 + Y3) ÷ 3<br>
+          Sstd = (S − 3) × 50<br><span class="formula-note">バーの表示率 = (S − 1) ÷ 4 × 100%<br>標準値は百分率ではありません。</span>
+        </div>
+        <div class="desc" id="sStd" style="margin:8px 0 0">守護強度の標準値：0</div>
+      </div>
+
+      <div class="card">
+        <h2>03　守護タイプ Z の判定</h2>
+        <div class="desc">
+          Y の標準座標と8つの仮説的なタイプ中心を比較します。3次元ユークリッド距離が最小のタイプを表示します。
+        </div>
+
+        <div class="result" aria-live="polite" aria-atomic="true">
+          <div class="eyebrow">最も近い守護タイプ</div>
+          <div class="zname" id="zName">Z8 中立状態</div>
+          <div class="meta" id="zMeta">現在の標準座標：(0, 0, 0)</div>
+        </div>
+
+        <table>
+          <thead><tr><th>タイプ</th><th>中心座標</th><th class="num">距離 D</th></tr></thead>
+          <tbody id="distBody"></tbody>
+        </table>
+
+        <div class="formula">
+          D = √[Σⱼ (Ystdⱼ − cⱼ)²]<br><span class="formula-note">j = 1, 2, 3 ／ c：各タイプの中心座標<br>同距離の場合は、元の V2 と同じく Z 番号順で判定します。</span>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <div class="footer">
+    <strong>モデルについて：</strong>
+    X の5段階は研究者が設定した視覚的特徴のコードです。Y はグループ別の平均から算出し、Z は V2 の仮説的な中心座標に基づいて分類します。計算の一貫性は心理的解釈の妥当性を保証するものではなく、実際の試料と鑑賞者の評価による検証・校正が必要です。
+    <div style="margin-top:16px;color:var(--ink)">研究者：陈圣泽</div>
+  </div>
+</div>
+
+<script>
+const XN = [
+ ["X1 頭部の仰角","Y1"],
+ ["X2 眼球の傾斜度","Y1"],
+ ["X3 開口と閉口の比率","Y1"],
+ ["X4 肩の持ち上がりの程度","Y1"],
+ ["X5 手の露出度","Y2"],
+ ["X6 身体の重心位置","Y2"],
+ ["X7 輪郭の明瞭さ","Y2"],
+ ["X8 虚構的な背景","Y3"],
+ ["X9 四肢の開閉度","Y3"],
+ ["X10 装飾の簡潔さ","Y3"]
+];
+
+const Z = [
+ {id:"Z1",name:"完全な守護",c:[75,75,75]},
+ {id:"Z2",name:"威嚇による守護",c:[25,75,25]},
+ {id:"Z3",name:"共感による守護",c:[75,0,25]},
+ {id:"Z4",name:"安らぎの守護",c:[25,0,75]},
+ {id:"Z5",name:"圧迫状態",c:[-25,75,-75]},
+ {id:"Z6",name:"疎隔状態",c:[-75,0,0]},
+ {id:"Z7",name:"無秩序状態",c:[0,0,-75]},
+ {id:"Z8",name:"中立状態",c:[0,0,0]}
+];
+
+const rows=document.getElementById("xrows");
+XN.forEach((it,i)=>{
+ const d=document.createElement("div");
+ d.className="xrow";
+ d.innerHTML=`
+ <div class="xhead">
+   <label class="xlabel" for="x${i}">${it[0]} <span class="groupTag">→ ${it[1]}</span></label>
+   <div class="codes"><b id="std${i}">0</b><small id="int${i}">内部コード 0</small></div>
+ </div>
+ <input id="x${i}" type="range" min="-100" max="100" step="50" value="0" oninput="calc()">
+ <div class="ticks"><span>−100</span><span>−50</span><span>0</span><span>+50</span><span>+100</span></div>`;
+ rows.appendChild(d);
+});
+
+const mean=a=>a.reduce((s,v)=>s+v,0)/a.length;
+const fmt=v=>(Math.round(v*100)/100).toFixed(2);
+const dist=(a,b)=>Math.sqrt(a.reduce((s,v,i)=>s+(v-b[i])**2,0));
+
+function drawRadar(vals){
+ const c=document.getElementById("radar"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+ ctx.clearRect(0,0,W,H);
+ const cx=W/2,cy=H/2+10,R=125;
+ const labels=["視線の交差","プロポーションによる畏敬","感情のリズム"];
+ const ang=[-Math.PI/2,-Math.PI/2+2*Math.PI/3,-Math.PI/2+4*Math.PI/3];
+
+ ctx.strokeStyle="#e3e3e3";ctx.lineWidth=1;
+ for(let l=1;l<=5;l++){
+   ctx.beginPath();
+   ang.forEach((a,j)=>{
+     const r=R*l/5,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;
+     j?ctx.lineTo(x,y):ctx.moveTo(x,y);
+   });
+   ctx.closePath();ctx.stroke();
+ }
+ ctx.strokeStyle="#c6c6c6";
+ ang.forEach(a=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);ctx.stroke()});
+
+ ctx.beginPath();
+ vals.forEach((v,j)=>{
+   const r=R*Math.max(1,Math.min(5,v))/5,x=cx+Math.cos(ang[j])*r,y=cy+Math.sin(ang[j])*r;
+   j?ctx.lineTo(x,y):ctx.moveTo(x,y);
+ });
+ ctx.closePath();ctx.fillStyle="rgba(177,42,42,.08)";ctx.fill();
+ ctx.strokeStyle="#b12a2a";ctx.lineWidth=3;ctx.stroke();
+
+ ctx.fillStyle="#111";ctx.font="14px -apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif";
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ ang.forEach((a,j)=>ctx.fillText(labels[j],cx+Math.cos(a)*(R+42),cy+Math.sin(a)*(R+30)));
+}
+
+function calc(){
+ const xs=XN.map((_,i)=>{
+   const v=Number(document.getElementById("x"+i).value);
+   const internal=v/50;
+   document.getElementById("std"+i).textContent=(v>0?"+":"")+v;
+   document.getElementById("int"+i).textContent="内部コード "+(internal>0?"+":"")+internal;
+   return internal;
+ });
+
+ const a1=mean(xs.slice(0,4));
+ const a2=mean(xs.slice(4,7));
+ const a3=mean(xs.slice(7,10));
+
+ const y=[3+a1,3+a2,3+a3];
+ const ys=y.map(v=>(v-3)*50);
+
+ ["1","2","3"].forEach((n,j)=>{
+   document.getElementById("y"+n).textContent=fmt(y[j]);
+   document.getElementById("ys"+n).textContent="標準値 "+fmt(ys[j]);
+   document.getElementById("avg"+n).textContent="内部コード平均 "+fmt([a1,a2,a3][j]);
+ });
+
+ document.getElementById("pA").textContent=fmt(a1);
+ document.getElementById("pB").textContent=fmt(y[0]);
+ document.getElementById("pC").textContent=fmt(ys[0]);
+
+ drawRadar(y);
+
+ const S=mean(y), Sstd=(S-3)*50;
+ document.getElementById("sText").textContent=fmt(S)+" / 5";
+ document.getElementById("sStd").textContent="守護強度の標準値："+fmt(Sstd);
+ document.getElementById("sFill").style.width=((S-1)/4*100)+"%";
+
+ const ds=Z.map(z=>({...z,d:dist(ys,z.c)})).sort((a,b)=>a.d-b.d);
+ const best=ds[0];
+ document.getElementById("zName").textContent=best.id+" "+best.name;
+ document.getElementById("zMeta").textContent=
+ `現在の標準座標：(${fmt(ys[0])}, ${fmt(ys[1])}, ${fmt(ys[2])}) ｜ 最短距離 D = ${fmt(best.d)}`;
+
+ const tbody=document.getElementById("distBody");tbody.innerHTML="";
+ ds.forEach((r,k)=>{
+   const tr=document.createElement("tr");if(k===0)tr.className="best";
+   tr.innerHTML=`<td>${r.id} ${r.name}</td><td>(${r.c.join(", ")})</td><td class="num">${fmt(r.d)}</td>`;
+   tbody.appendChild(tr);
+ });
+}
+
+function resetAll(){
+ XN.forEach((_,i)=>document.getElementById("x"+i).value=0);
+ calc();
+}
+calc();
+</script>
+</body>
+</html>
